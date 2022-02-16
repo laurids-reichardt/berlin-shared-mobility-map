@@ -1,5 +1,5 @@
 import { atom } from 'jotai'
-import { LayerKey } from './specs/layers'
+import { LayerKey } from './specs/mapLayers'
 
 /**
  * This application doesn't contain much shared state which is why I decided to use the simple state management library
@@ -8,13 +8,13 @@ import { LayerKey } from './specs/layers'
  */
 
 /**
- * Stores the key of the currently visible map layer. Other map layer can become visible by mutating this state.
+ * Stores the key of the currently visible map layer. Other map layer become visible by mutating this state.
  */
 export const visibleLayerKeyAtom = atom<LayerKey>('Trips Layer')
 
 /**
- * Mainly controls visibility of the loading spinner by storing if the source data of the currently loaded map layer is
- * already loaded.
+ * Mainly controls visibility of the loading spinner by storing if the source data of the currently visible map layer
+ * is already loaded.
  */
 export const visibleLayerDataLoadedAtom = atom(false)
 

@@ -1,7 +1,7 @@
 import { Button, Typography, Stack, Link } from '@mui/material'
 import { GitHub, LinkedIn, Twitter } from '@mui/icons-material'
 import Avatar from '@mui/material/Avatar'
-import profilePictureURL from '../../static_assets/laurids.jpg?url'
+import profilePictureURL from '../../assets/laurids.jpg?url'
 
 /**
  * The Profile component displays a small avatar profile picture of myself and provides links to my social sites.

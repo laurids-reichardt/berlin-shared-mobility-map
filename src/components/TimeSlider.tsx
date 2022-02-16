@@ -4,7 +4,7 @@ import { useRafLoop } from 'react-use'
 import { Box, Paper, Slider, IconButton } from '@mui/material'
 import { PlayArrow, Pause } from '@mui/icons-material'
 import { timeAtom, dateAtom, visibleLayerKeyAtom, visibleLayerDataLoadedAtom } from '../state'
-import { LAYERS, timeUnit } from '../specs/layers'
+import { mapLayers, timeUnit } from '../specs/mapLayers'
 
 /**
  * Use the current time value, time unit and offset to align the current date value to the corresponding date.
@@ -58,7 +58,7 @@ export default function TimeSlider() {
     displayHours,
     animationRunningTime,
     startAnimationByDefault,
-  } = LAYERS[visibleLayerName].timelineProps
+  } = mapLayers[visibleLayerName].timelineProps
 
   const [time, setTime] = useAtom(timeAtom)
   const [date, setDate] = useAtom(dateAtom)

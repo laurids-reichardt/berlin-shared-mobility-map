@@ -17,10 +17,11 @@
     "date-fns": "^2.28.0",
     "deck.gl": "^8.6.5",
     "jotai": "^1.5.0",
+    "maplibre-gl": "^2.1.1",
     "markdown-to-jsx": "^7.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-map-gl": "^5.3.18",
+    "react-map-gl": "^7.0.6",
     "react-use": "^17.3.2",
     "victory": "^36.2.0"
   },

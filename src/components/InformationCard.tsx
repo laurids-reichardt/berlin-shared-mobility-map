@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { ExpandMore, KeyboardArrowLeft, KeyboardArrowRight, Info } from '@mui/icons-material'
 import Markdown from './Markdown'
-import { LAYERS, LayerOrder } from '../specs/layers'
+import { mapLayers, layerOrder } from '../specs/mapLayers'
 import { visibleLayerKeyAtom } from '../state'
 
 /**
@@ -25,7 +25,7 @@ export default function InformationCard() {
   const [accordionExpanded, setAccordionExpanded] = React.useState(false)
   const handleAccordionExpansion = () => setAccordionExpanded((prevExpanded) => !prevExpanded)
 
-  const [visibleLayerIndex, setVisibleLayerIndex] = React.useState(LayerOrder.indexOf(visibleLayerKey))
+  const [visibleLayerIndex, setVisibleLayerIndex] = React.useState(layerOrder.indexOf(visibleLayerKey))
   const handleNext = () => {
     // setAccordionExpanded(false)
     setVisibleLayerIndex((prevVisibleLayerIndex) => prevVisibleLayerIndex + 1)
@@ -46,7 +46,7 @@ export default function InformationCard() {
    * Switch to the next map layer if the user navigates via the back or next button at the bottom of the card.
    */
   React.useEffect(() => {
-    const nextVisibleLayerKey = LayerOrder[visibleLayerIndex]
+    const nextVisibleLayerKey = layerOrder[visibleLayerIndex]
     setVisibleLayerKey(nextVisibleLayerKey)
 
     /**
@@ -96,19 +96,19 @@ export default function InformationCard() {
             },
           })}
         >
-          <Markdown>{LAYERS[visibleLayerKey].descriptionMarkdown}</Markdown>
+          <Markdown>{mapLayers[visibleLayerKey].descriptionMarkdown}</Markdown>
         </Box>
 
         <Divider sx={{ margin: '8px 0' }} />
 
         <MobileStepper
           sx={{ padding: 0, backgroundColor: 'transparent' }}
-          steps={LayerOrder.length}
+          steps={layerOrder.length}
           position="static"
           variant="dots"
           activeStep={visibleLayerIndex}
           nextButton={
-            <Button size="small" onClick={handleNext} disabled={visibleLayerIndex === LayerOrder.length - 1}>
+            <Button size="small" onClick={handleNext} disabled={visibleLayerIndex === layerOrder.length - 1}>
               Next <KeyboardArrowRight />
             </Button>
           }

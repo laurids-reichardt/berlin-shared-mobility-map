@@ -1,13 +1,14 @@
 import React from 'react'
 import { useAtom } from 'jotai'
 import { format, startOfISOWeek } from 'date-fns'
-import 'mapbox-gl/dist/mapbox-gl.css'
+import maplibregl from 'maplibre-gl'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import DeckGL from '@deck.gl/react'
-import { StaticMap } from 'react-map-gl'
+import ReactMapGL from 'react-map-gl'
 import { load } from '@loaders.gl/core'
 import { CSVLoader } from '@loaders.gl/csv'
-import MAPSTYLE from '../mapstyle.json'
-import { LayerKey, LayerViewportTransition, LAYERS, LayerOrder } from '../specs/layers'
+import MAPSTYLE from '../../assets/mapstyle.json?url'
+import { LayerKey, LayerViewportTransition, mapLayers, layerOrder } from '../specs/mapLayers'
 import { sourceData, SourceDataDownloadOrder, SourceDataKey } from '../specs/sourceData'
 import { timeAtom, dateAtom, visibleLayerKeyAtom, visibleLayerDataLoadedAtom } from '../state'
 
@@ -16,7 +17,7 @@ import { timeAtom, dateAtom, visibleLayerKeyAtom, visibleLayerDataLoadedAtom } f
  */
 function useFetchSourceData(visibleLayerSourceDataKey: SourceDataKey) {
   /**
-   * Holds keys of all source data entries that are already loaded.
+   * Holds keys of all source data entries that are already loaded and available to the application.
    */
   const [loadedSourceDataKeys, setLoadedSourceDataKeys] = React.useState<Array<SourceDataKey>>([])
 
@@ -80,7 +81,9 @@ function useFetchSourceData(visibleLayerSourceDataKey: SourceDataKey) {
     })()
   }, [])
 
-  // Stores information on whether the source data of the currently visible layer is already loaded and available.
+  /**
+   * Stores information on whether the source data of the currently visible layer is already loaded and available.
+   */
   const [visibleLayerDataLoaded, setVisibleLayerDataLoaded] = useAtom(visibleLayerDataLoadedAtom)
 
   /**
@@ -89,7 +92,7 @@ function useFetchSourceData(visibleLayerSourceDataKey: SourceDataKey) {
   React.useEffect(() => {
     // Check if loadedSourceDataKeys includes the key of the source data for the currently visible layer.
     setVisibleLayerDataLoaded(loadedSourceDataKeys.includes(visibleLayerSourceDataKey))
-  })
+  }, [visibleLayerSourceDataKey, loadedSourceDataKeys, setVisibleLayerDataLoaded])
 
   return visibleLayerDataLoaded
 }
@@ -115,7 +118,7 @@ function useViewportTransitions(
     bearing: 0,
   }
 
-  const firstLayerTransitions = LAYERS[LayerOrder[0]]?.viewportTransitions
+  const firstLayerTransitions = mapLayers[layerOrder[0]]?.viewportTransitions
 
   const initialViewstate: LayerViewportTransition =
     typeof firstLayerTransitions !== 'undefined' ? firstLayerTransitions[0] : defaultViewstate
@@ -124,7 +127,7 @@ function useViewportTransitions(
 
   const viewStateRef = React.useRef(transitionTargetViewState)
 
-  const visibleLayer = LAYERS[visibleLayerKey]
+  const visibleLayer = mapLayers[visibleLayerKey]
 
   React.useEffect(() => {
     /**
@@ -223,11 +226,11 @@ function useTransformSourceData(
   visibleLayerDataLoaded: boolean
 ) {
   React.useEffect(() => {
-    for (const layerKey of LayerOrder) {
+    for (const layerKey of layerOrder) {
       if (visibleLayerKey === layerKey) {
-        const layer = LAYERS[layerKey]
+        const layer = mapLayers[layerKey]
         if (typeof layer.transformSourceData === 'function') {
-          layer.transformSourceData(LAYERS[layerKey], visibleLayerKey, time, hour, week)
+          layer.transformSourceData(mapLayers[layerKey], visibleLayerKey, time, hour, week)
         }
       }
     }
@@ -242,8 +245,6 @@ function use24HourTimeAndWeekNumber(time: number, date: Date): [hour: number, we
   const [week, setWeek] = React.useState('2020-01-01')
 
   React.useEffect(() => {
-    // console.log('Processing time: ', date.toISOString())
-
     const _hour = Math.floor((time / 3600) % 24)
     setHour((prevHour) => (prevHour !== _hour ? _hour : prevHour))
 
@@ -259,24 +260,18 @@ function use24HourTimeAndWeekNumber(time: number, date: Date): [hour: number, we
  */
 export default function Map() {
   const [visibleLayerKey] = useAtom(visibleLayerKeyAtom)
-  const visibleLayerDataLoaded = useFetchSourceData(LAYERS[visibleLayerKey].sourceDataKey)
+  const visibleLayerDataLoaded = useFetchSourceData(mapLayers[visibleLayerKey].sourceDataKey)
   const [time] = useAtom(timeAtom)
   const [date] = useAtom(dateAtom)
   const [hour, week] = use24HourTimeAndWeekNumber(time, date)
 
-  // data transformation hook
   useTransformSourceData(time, hour, week, visibleLayerKey, visibleLayerDataLoaded)
 
   /**
-   * Deck.gl layers
+   * Array of all map layers to be rendered by deck.gl.
    */
-  // const deckglLayers = [
-  //   LAYERS['Trips Layer'].getDeckGlLayer(LAYERS['Trips Layer'], visibleLayerKey, time, hour, week),
-  //   LAYERS['Path Utilization Layer'].getDeckGlLayer(LAYERS['Trips Layer'], visibleLayerKey, time, hour, week),
-  // ]
-
-  const deckglLayers = LayerOrder.map((layerKey) =>
-    LAYERS[layerKey].getDeckGlLayer(LAYERS[layerKey], visibleLayerKey, time, hour, week)
+  const deckglLayers = layerOrder.map((layerKey) =>
+    mapLayers[layerKey].getDeckGlLayer(mapLayers[layerKey], visibleLayerKey, time, hour, week)
   )
 
   /**
@@ -293,7 +288,7 @@ export default function Map() {
       layers={deckglLayers}
       onLoad={() => setDeckglLoaded(true)}
     >
-      <StaticMap mapStyle={MAPSTYLE} mapOptions={{ hash: false }} />
+      <ReactMapGL mapLib={maplibregl} mapStyle={MAPSTYLE} />
     </DeckGL>
   )
 }

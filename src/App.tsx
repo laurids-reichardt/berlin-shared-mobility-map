@@ -6,7 +6,9 @@ import Map from './components/Map'
 import { visibleLayerDataLoadedAtom } from './state'
 
 export default function App() {
-  //  Display a loading spinner while the source data of the currently visible layer is not yet loaded.
+  /**
+   * Display a loading spinner while the source data of the currently visible layer is not yet loaded.
+   */
   const [visibleLayerDataLoaded] = useAtom(visibleLayerDataLoadedAtom)
 
   return (

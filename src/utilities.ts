@@ -1,5 +1,5 @@
 // @ts-ignore
-import { scaleQuantize, scaleLinear } from 'd3-scale'
+import { scaleLinear } from 'd3-scale'
 import { RGBAColor } from '@deck.gl/core/utils/color'
 
 /**

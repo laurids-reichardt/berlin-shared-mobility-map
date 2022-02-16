@@ -1,8 +1,7 @@
-import bicycle_trip_routes_for_2021_05_01_url from '../../static_assets/bicycle_trip_routes_for_2021_05_01.tsv?url'
-import bicycle_availability_for_2021_05_01_url from '../../static_assets/bicycle_availability_for_2021_05_01.tsv?url'
-import bicycle_trips_for_2021_07_14_url from '../../static_assets/bicycle_trips_for_2021_07_14.tsv?url'
-import bicycle_trips_for_2021_05_01_url from '../../static_assets/bicycle_trips_for_2021_05_01.tsv?url'
-import path_utilization_by_hour_of_day_url from '../../static_assets/path_utilization_by_hour_of_day.tsv?url'
+import bicycle_trip_routes_for_2021_05_01_url from '../../assets/bicycle_trip_routes_for_2021_05_01.tsv?url'
+import bicycle_availability_for_2021_05_01_url from '../../assets/bicycle_availability_for_2021_05_01.tsv?url'
+import bicycle_trips_for_2021_07_14_url from '../../assets/bicycle_trips_for_2021_07_14.tsv?url'
+import path_utilization_by_hour_of_day_url from '../../assets/path_utilization_by_hour_of_day.tsv?url'
 
 /**
  * The download order of the source data files should match the order in which they are needed by the individual map
@@ -12,7 +11,6 @@ export const SourceDataDownloadOrder = [
   'bicycle_trip_routes_for_2021_05_01.tsv',
   'bicycle_availability_for_2021_05_01.tsv',
   'bicycle_trips_for_2021_07_14.tsv',
-  'bicycle_trips_for_2021_05_01.tsv',
   'path_utilization_by_hour_of_day.tsv',
 ] as const
 
@@ -85,12 +83,6 @@ export const sourceData: Record<SourceDataKey, SourceData> = {
   },
   'bicycle_availability_for_2021_05_01.tsv': {
     url: bicycle_availability_for_2021_05_01_url,
-    loaderOptions: genericCSVLoaderOptions,
-    rawData: [],
-    filteredData: [],
-  },
-  'bicycle_trips_for_2021_05_01.tsv': {
-    url: bicycle_trips_for_2021_05_01_url,
     loaderOptions: genericCSVLoaderOptions,
     rawData: [],
     filteredData: [],

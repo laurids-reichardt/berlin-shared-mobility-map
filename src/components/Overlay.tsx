@@ -3,7 +3,7 @@ import TimeSlider from './TimeSlider'
 import InformationCard from './InformationCard'
 
 /**
- * The Overlay component displays the InformationCard and the TimeSlider each at the top and bottom of the screen.
+ * The Overlay component displays the InformationCard and the TimeSlider at the top and bottom of the screen.
  */
 export default function Overlay() {
   return (

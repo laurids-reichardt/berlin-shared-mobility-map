@@ -4,11 +4,11 @@
 
 This web application visualizes interesting patterns and trends of the shared mobility traffic in Berlin, Germany. It represents a small excerpt of my exploratory work on shared mobility during my studies at [HTW Berlin](https://www.htw-berlin.de/en/). The project is work in progress and will receive continues updates. The source code is available on [GitHub](https://github.com/laurids-reichardt/berlin-shared-mobility-map).
 
-Discover different map layers by navigating via the buttons on the bottom of this information card. Additional information will show up inside this card. On the bottom of the application you’ll find a timeline player bar that allows you to start, stop and scroll through the map layer animation. You can rotate the viewport by holding cmd or ctrl respectively and dragging the mouse on the map. Scrolling and panning is supported via mouse input as well.
+Discover different map layers by navigating via the buttons on the bottom of the information card. Additional information will show up inside the card. On the bottom of the application you’ll find a timeline player bar that allows you to start, stop and scroll through the map layer animation. You can rotate the viewport by holding cmd or ctrl respectively and dragging the mouse on the map. Scrolling and panning is supported via mouse input as well.
 
 ### Data Source
 
-The underlying data for this application is sourced by a custom web crawler which continuously requests and saves all available for rent bicycles of a large shared mobility provider in Berlin. I won't publicly disclose the name of the provider since I'm unsure of the copyright/legal implications. The crawler runs once a minute and all data is stored inside a PostgreSQL database. Routing data is calculated via a [OSRM](http://project-osrm.org/) backend and some Python glue code. All of this is self-hosted and maintained on a personal dedicated server.
+The underlying data for the application is sourced by a custom web crawler which continuously requests and saves all available for rent bicycles of a large shared mobility provider in Berlin. I won't publicly disclose the name of the provider since I'm unsure of the copyright/legal implications. The crawler sends requests once a minute and stores all data inside a [PostgreSQL](https://www.postgresql.org/) database. All routing data is calculated via a [OSRM](http://project-osrm.org/) backend and some Python glue code. All of this is self-hosted and maintained on a personal dedicated server.
 
 ### May Day Trips
 

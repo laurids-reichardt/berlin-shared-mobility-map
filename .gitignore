@@ -3,6 +3,3 @@ node_modules
 dist
 dist-ssr
 *.local
-
-static_assets/*
-!static_assets/.gitkeep

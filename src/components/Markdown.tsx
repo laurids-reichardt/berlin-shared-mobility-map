@@ -1,6 +1,5 @@
 import ReactMarkdown from 'markdown-to-jsx'
 import { Typography, Link } from '@mui/material'
-import { Chart } from './Chart'
 import { Profile } from './Profile'
 
 /**
@@ -18,7 +17,6 @@ const options = {
     p: { component: Typography, props: { paragraph: true, align: 'justify', sx: { hyphens: 'auto' } } },
     a: { component: Link, props: { target: '_blank', rel: 'noreferrer' } },
     td: { component: TD },
-    Chart: { component: Chart },
     Profile: { component: Profile },
   },
 }

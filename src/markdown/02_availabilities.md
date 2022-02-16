@@ -2,12 +2,12 @@
 
 The dataset for all statistics and visualizations of this application spans a twelve-month period from November 1, 2020 till November 1, 2021 and contains over 2.1 billion data points. Each individual data point contains the timestamp, position, unique identifier, and additional properties (e.g., battery level, gearbox type) of an at that point in time available for rent bicycle.
 
-Subsequently, I group the individual data rows by the unique vehicle identifier to individual availability time frames. For example: Bicycle fN6xl7yj is detected as available once a minute at the location XYZ between 15:00 UTC and 15:32 UTC. Thereafter, bicycle fN6xl7yj disappears from the dataset only to get detected again 23 minutes later at a different location ZXY. The described scenario would lead _simplified_ to the following two availability entries for bicycle fN6xl7yj:
+Subsequently, I group the individual data rows by the unique vehicle identifier to individual availability time frames. For example: Bicycle fN6xl7yj is detected as available once a minute at location A between 15:00 UTC and 15:32 UTC. Thereafter, bicycle fN6xl7yj disappears from the dataset only to get detected again 23 minutes later at a different location B. The described scenario would lead _simplified_ to the following two availability entries for bicycle fN6xl7yj:
 
-| unique_id | time_period    | position |
+| unique_id | time_period    | location |
 | --------- | -------------- | -------- |
-| fN6xl7yj  | [15:00, 15:32] | XYZ      |
-| fN6xl7yj  | [15:55, null]  | ZXY      |
+| fN6xl7yj  | [15:00, 15:32] | A        |
+| fN6xl7yj  | [15:55, null]  | B        |
 
 <br>
 
