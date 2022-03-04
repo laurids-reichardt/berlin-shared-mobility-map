@@ -3,7 +3,7 @@ import { ScatterplotLayer, ArcLayer, PathLayer } from '@deck.gl/layers'
 import { TripsLayer } from '@deck.gl/geo-layers'
 import { Layer } from 'react-map-gl'
 import { sourceData, SourceDataKey } from './sourceData'
-import { TripsLayerMarkdown, AvailabilitiesMarkdown, TripArcsMarkdown, PathUtilizationMarkdown } from '../markdown'
+import layerMarkdown from '../markdown'
 import { IS_LARGE_SCREEN_DEVICE, TRIP_SEGMENT_COLORS, PATH_COLOR_SCALE, hexToRgb } from '../utilities'
 
 /**
@@ -142,7 +142,7 @@ export const mapLayers: Record<LayerKey, Layer> = {
    */
   'Trips Layer': {
     sourceDataKey: 'bicycle_trip_routes_for_2021_05_01.tsv',
-    descriptionMarkdown: TripsLayerMarkdown,
+    descriptionMarkdown: layerMarkdown.TripsLayer,
 
     timelineProps: {
       timeUnit: 'second',
@@ -217,7 +217,7 @@ export const mapLayers: Record<LayerKey, Layer> = {
    */
   'Availabilities Layer': {
     sourceDataKey: 'bicycle_availability_for_2021_05_01.tsv',
-    descriptionMarkdown: AvailabilitiesMarkdown,
+    descriptionMarkdown: layerMarkdown.Availabilities,
 
     timelineProps: {
       timeUnit: 'second',
@@ -273,7 +273,7 @@ export const mapLayers: Record<LayerKey, Layer> = {
    */
   'Trip Arcs Layer': {
     sourceDataKey: 'bicycle_trips_for_2021_07_14.tsv',
-    descriptionMarkdown: TripArcsMarkdown,
+    descriptionMarkdown: layerMarkdown.TripArcs,
 
     timelineProps: {
       timeUnit: 'second',
@@ -339,7 +339,7 @@ export const mapLayers: Record<LayerKey, Layer> = {
    */
   'Path Utilization Layer': {
     sourceDataKey: 'path_utilization_by_hour_of_day.tsv',
-    descriptionMarkdown: PathUtilizationMarkdown,
+    descriptionMarkdown: layerMarkdown.PathUtilization,
 
     timelineProps: {
       timeUnit: 'second',

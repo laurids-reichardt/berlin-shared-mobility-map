@@ -11,7 +11,11 @@ Subsequently, I group the individual data rows by the unique vehicle identifier 
 
 <br>
 
-This transformation greatly eases the handling and compresses the large dataset to just over 6 million individual availability entries.
+This transformation greatly eases the handling and compresses the large dataset to just over 6 million individual availability entries. Querying the distribution of features is greatly simplified. For example the subsequent chart visualizes the number of distinct bicycles available during each of the 52 weeks of the specified time period.
+
+<Charts name='DISTINCT_VEHICLE_DISTRIBUTION' />
+
+It appears that the number of bicycles on the road stayed relatively stable at round 4000 with a small drop to around 3600 during the later half of 2021.
 
 ### Bicycle Availability
 

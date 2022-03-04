@@ -288,7 +288,7 @@ export default function Map() {
       layers={deckglLayers}
       onLoad={() => setDeckglLoaded(true)}
     >
-      <ReactMapGL mapLib={maplibregl} mapStyle={MAPSTYLE} />
+      <ReactMapGL mapLib={maplibregl} mapStyle={MAPSTYLE} RTLTextPlugin={''} />
     </DeckGL>
   )
 }
